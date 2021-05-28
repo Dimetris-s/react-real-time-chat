@@ -1,0 +1,11 @@
+@import '../../scss/vars';
+
+.Navbar {
+    height: 50px;
+    background-color: $accent-color;
+    color: white;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    display: flex;
+    align-items: center;
+}
