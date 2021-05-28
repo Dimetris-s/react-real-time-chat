@@ -1,0 +1,10 @@
+@import '../../scss/vars';
+
+.Login {
+    padding-top: calc( #{$navbar-height} + 15rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    flex-grow: 1;
+    background-color: $rare-color;
+}

@@ -1,17 +1,15 @@
-import { Fragment } from "react";
 import {  Redirect, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import Container from "./hoc/Container/Container";
+import Layout from "./hoc/Layout/Layout";
 import {privateRoutes, publicRoutes} from "./routes/routes"
 
 function App() {
-  const user = false
+  const user = true
 
 
   return (
-    <Fragment>
+    <Layout>
       <Navbar/>
-      <Container>
         <Switch>
           {
             user
@@ -24,8 +22,7 @@ function App() {
           }
           <Redirect to={ user ? '/chat' : '/login'}/>
         </Switch>
-      </Container>
-    </Fragment>
+    </Layout>
   );
 }
 

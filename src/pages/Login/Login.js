@@ -4,7 +4,7 @@ import  './Login.scss'
 const Login = props => {
     return (
         <div className="Login">
-            Login
+            <button className="btn-lg btn btn-success Login__btn">Login with Google</button>
         </div>
     )
 }
