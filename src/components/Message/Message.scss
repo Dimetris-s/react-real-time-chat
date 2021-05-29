@@ -1,0 +1,63 @@
+@import '../../scss/vars';
+
+.message {
+    max-width: 50%;
+    display: grid;
+    border-radius: 5px;
+    grid-template-columns: 35px minmax(50%, auto);
+    grid-template-rows: minmax(35px, 20%) minmax(20%, auto) 5%;
+    background-color: rgb(172, 255, 248);
+    padding: 0.7rem 0.5rem;
+    column-gap: 0.6rem;
+    row-gap: 0.3rem;
+    box-shadow: 1px 1px 3px 1px #333;
+    position: relative;
+
+
+
+    &.user-message {
+        align-self: flex-end;
+        background-color: rgb(222, 255, 196);
+    }
+
+
+    &__img {
+        border-radius: 50%;
+        overflow: hidden;
+        grid-column: 1;
+        grid-row: 1;
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    &__username {
+        grid-row: 1;
+        align-self: center;
+        justify-self: start;
+        color: #3384ff;
+        font-size: 1.2rem;
+    }
+
+    &__text {
+        grid-column: span 2;
+        grid-row: 2;
+        font-size: 0.8rem;
+        word-wrap: break-word;
+    }
+
+    &__date {
+        align-self: end;
+        justify-self: end;
+        font-size: 0.8rem;
+        grid-row: 3;
+        grid-column: 2;
+        color: rgb(10, 43, 0);
+        font-style: italic;
+    } 
+}
+

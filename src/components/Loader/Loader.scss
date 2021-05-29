@@ -1,0 +1,36 @@
+@import '../../scss/vars';
+
+.Loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    flex-grow: 1;
+    &__body {
+        border: 90px solid $secondary-color;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+
+        animation: rotate 1s infinite forwards linear;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+        border-left-color: $secondary-color;
+        border-right-color: $secondary-color;
+    }
+
+    50% {
+        border-left-color: $accent-color;
+        border-right-color: $accent-color;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        border-left-color: $secondary-color;
+        border-right-color: $secondary-color;
+    }
+}

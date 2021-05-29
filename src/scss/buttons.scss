@@ -13,11 +13,15 @@ a.btn,
     font-size: 1rem;
     font-weight: 700;
     color: #464646;
+    &:disabled {
+        $btn-color: $btn-color;
+        background-color: $btn-color; 
+    }
     @media(max-width: 991px) {
         font-size: 0.8rem;
     }
 
-    &:hover {
+    &:hover:not(:disabled) {
         background-color: darken($btn-color, 2%);
     }
 
@@ -35,7 +39,7 @@ a.btn,
         box-shadow: 0px 1px 5px 0px #000;
         background-color: $btn-color;
 
-        &:hover {
+        &:hover:not(:disabled) {
             background-color: darken($btn-color, 2%);
         }
 
@@ -50,7 +54,7 @@ a.btn,
         background-color: $btn-color;
         box-shadow: 0px 1px 5px 0px #000;
 
-        &:hover {
+        &:hover:not(:disabled) {
             background-color: darken($btn-color, 2%);
         }
 
@@ -63,13 +67,16 @@ a.btn,
         $btn-color: #56ff87;
         background-color: $btn-color;
         box-shadow: 0px 1px 5px 0px #000;
+        transition: box-shadow ease .1s;
+        
 
-        &:hover {
-            background-color: darken($btn-color, 2%);
+        &:hover:not(:disabled) {
+            background-color: darken($btn-color, 5%);
+            box-shadow: 0px 1px 10px 0px #000;
         }
 
         &:active {
-            box-shadow: inset 0px 1px 2px 0px #000;
+            box-shadow: inset 0px 1px 2px 0px #000 !important;
             transform: translateY(1px);
         }
     }

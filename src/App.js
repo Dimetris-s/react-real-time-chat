@@ -1,16 +1,23 @@
+import { useContext } from "react";
 import {  Redirect, Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Layout from "./hoc/Layout/Layout";
+import {firebaseContext} from './context/firebaseContext'
 import {privateRoutes, publicRoutes} from "./routes/routes"
+import {useAuthState} from "react-firebase-hooks/auth"
+import Loader from "./components/Loader/Loader";
 
 function App() {
-  const user = true
-
+  const {auth} = useContext(firebaseContext)
+  const [user, loading] = useAuthState(auth)
 
   return (
     <Layout>
       <Navbar/>
-        <Switch>
+      {
+        loading 
+          ? <Loader/>
+          : <Switch>
           {
             user
               ? privateRoutes.map(({path, Component}) => (
@@ -22,6 +29,8 @@ function App() {
           }
           <Redirect to={ user ? '/chat' : '/login'}/>
         </Switch>
+      }
+        
     </Layout>
   );
 }
