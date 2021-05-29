@@ -14,15 +14,23 @@ const Chat = props => {
     const [user] = useAuthState(auth)
     const [messages, loading] = useCollectionData(firestore.collection('messages').orderBy('createdAt', 'desc'))
 
-    
+    const deleteMessage = async id => {
+        await firestore.collection('messages').doc(id).delete()
+    }
+
 
     const sendMessage = async () => {
         firestore.collection('messages').add({
-            id: user.uid,
+            uid: user.uid,
             username: user.displayName,
             userAvatar: user.photoURL,
             text: inputValue,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            date: `${new Date().toLocaleDateString()} | ${new Date().toLocaleTimeString()}`
+        }).then(docRef => {   
+            docRef.update({
+                id: docRef.id                
+            })
         })
 
 
@@ -31,14 +39,13 @@ const Chat = props => {
     return (
         <div className="Chat">
             <Container>
-                <h1 className="Chat__title">Добро пожаловать в чат!</h1>
                 <div className="Chat__grid">
                     <div className="Chat__messages">
                         {
                             loading 
                             ? <Loader/>
                             : messages.map((message, index) => {
-                                return <Message key={index} userId={user.uid} message={message}/>
+                                return <Message deleteMessage={deleteMessage} key={index} userId={user.uid} message={message}/>
                             })
                         }
                     </div>

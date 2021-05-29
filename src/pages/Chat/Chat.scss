@@ -1,13 +1,13 @@
 @import "../../scss/vars.scss";
 
 .Chat {
-    padding-top: calc( #{$navbar-height} + 2rem);
+    padding-top: calc( #{$navbar-height} + 4rem);
     display: flex;
     flex-direction: column;
     align-items: center; 
     flex-grow: 1;
     background-color: $rare-color;
-    padding-bottom: 5rem;
+    padding-bottom: 4rem;
 
     &__grid {
         display: grid;

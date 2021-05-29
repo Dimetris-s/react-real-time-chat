@@ -18,6 +18,9 @@
     &.user-message {
         align-self: flex-end;
         background-color: rgb(222, 255, 196);
+        &:hover .message__delete {
+            display: flex;
+        }
     }
 
 
@@ -59,5 +62,29 @@
         color: rgb(10, 43, 0);
         font-style: italic;
     } 
+
+    &__delete {
+        position: absolute;
+        cursor: pointer;
+        border-radius: 50%;
+        background-color: rgb(0, 139, 231);
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: -7px;
+        right: -7px;
+        box-shadow: 1px 1px 3px 0px #000;
+        font-size: 1rem;
+        color: white;
+        display: none;
+        &:hover {
+            background-color: lighten(rgb(0, 139, 231), 10%)
+        }
+        &:active {
+            background-color: darken(rgb(0, 139, 231), 10%)
+        }
+    }
 }
 
