@@ -7,6 +7,7 @@ import {useCollectionData} from "react-firebase-hooks/firestore"
 import firebase from 'firebase/app'
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
+import {CSSTransition, TransitionGroup} from 'react-transition-group'
 
 const Chat = props => {
     const [inputValue, setInputValue] = useState('')
@@ -41,16 +42,25 @@ const Chat = props => {
     return (
         <div className="Chat">
             <Container>
-                <div className="Chat__messages">
-                    {
-                        loading 
-                        ? <Loader/>
-                        : messages.map((message, index) => (
-                                 <Message key={index} deleteMessage={deleteMessage}  userId={user.uid} message={message}/>
+                {
+                    loading 
+                    ? <div className="Chat__messages">
+                        <Loader/>
+                      </div>
+                    : <TransitionGroup  className="Chat__messages">
+                            {messages.map((message, index) => (
+                                <CSSTransition
+                                    key={index}
+                                    timeout={2000}
+                                    classNames={'message'}
+                                >
+                                    <Message  deleteMessage={deleteMessage}  userId={user.uid} message={message}/>
+                                </CSSTransition>
 
-                        ))
-                    }
-                </div>
+                            ))}
+                      </TransitionGroup>
+                }
+                
                 <form className="form Chat__form" onSubmit={submitHandler}>
                     <input onChange={e => setInputValue(e.target.value)} value={inputValue} type="text" placeholder="Введите ваше сообщение..." className="Chat__input" />
                     <button onClick={submitHandler} disabled={!inputValue.trim()} className="btn btn-send Chat__btn">Отправить</button>

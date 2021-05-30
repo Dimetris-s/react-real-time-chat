@@ -86,5 +86,21 @@
             background-color: darken(rgb(0, 139, 231), 10%)
         }
     }
-}
 
+    &-enter {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    &-enter-active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    &-exit {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    &-enter-active {
+        transform: translateX(200px);
+        opacity: 0;
+    }
+}
