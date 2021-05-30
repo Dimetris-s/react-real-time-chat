@@ -15,7 +15,7 @@ const Navbar = props => {
 
     return (
         <div className="Navbar">
-            {user ? user.displayName : "Navbar"}
+            {user ? user.displayName : "Realtime chat"}
             {
                 loading 
                     ? null

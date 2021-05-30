@@ -18,40 +18,43 @@ const Chat = props => {
         await firestore.collection('messages').doc(id).delete()
     }
 
+    const submitHandler = event => {
+        event.preventDefault()
+        sendMessage()
+    }
 
     const sendMessage = async () => {
-        firestore.collection('messages').add({
+        const docRef = await firestore.collection('messages').add({
             uid: user.uid,
             username: user.displayName,
             userAvatar: user.photoURL,
             text: inputValue,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
             date: `${new Date().toLocaleDateString()} | ${new Date().toLocaleTimeString()}`
-        }).then(docRef => {   
-            docRef.update({
-                id: docRef.id                
-            })
         })
-
+        docRef.update({
+            id: docRef.id                
+        })
 
         setInputValue('')
     }
     return (
         <div className="Chat">
             <Container>
-                <div className="Chat__grid">
-                    <div className="Chat__messages">
-                        {
-                            loading 
-                            ? <Loader/>
-                            : messages.map((message, index) => {
-                                return <Message deleteMessage={deleteMessage} key={index} userId={user.uid} message={message}/>
-                            })
-                        }
-                    </div>
+                <div className="Chat__messages">
+                    {
+                        loading 
+                        ? <Loader/>
+                        : messages.map((message, index) => (
+                                 <Message key={index} deleteMessage={deleteMessage}  userId={user.uid} message={message}/>
+
+                        ))
+                    }
+                </div>
+                <form className="form Chat__form" onSubmit={submitHandler}>
                     <input onChange={e => setInputValue(e.target.value)} value={inputValue} type="text" placeholder="Введите ваше сообщение..." className="Chat__input" />
-                    <button onClick={sendMessage} disabled={!inputValue.trim()} className="btn btn-send Chat__btn">Отправить</button>
-                </div>  
+                    <button onClick={submitHandler} disabled={!inputValue.trim()} className="btn btn-send Chat__btn">Отправить</button>
+                </form>
             </Container>
         </div>
     )
