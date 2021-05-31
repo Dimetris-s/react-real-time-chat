@@ -8,6 +8,7 @@ import firebase from 'firebase/app'
 import Loader from "../../components/Loader/Loader";
 import Message from "../../components/Message/Message";
 import {CSSTransition, TransitionGroup} from 'react-transition-group'
+import {v4} from 'uuid'
 
 const Chat = props => {
     const [inputValue, setInputValue] = useState('')
@@ -31,9 +32,10 @@ const Chat = props => {
             userAvatar: user.photoURL,
             text: inputValue,
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-            date: `${new Date().toLocaleDateString()} | ${new Date().toLocaleTimeString()}`
+            date: `${new Date().toLocaleDateString()} | ${new Date().toLocaleTimeString()}`,
+            aid: v4()
         })
-        docRef.update({
+        await docRef.update({
             id: docRef.id                
         })
 
@@ -48,10 +50,10 @@ const Chat = props => {
                         <Loader/>
                       </div>
                     : <TransitionGroup  className="Chat__messages">
-                            {messages.map((message, index) => (
+                            {messages.map((message) => (
                                 <CSSTransition
-                                    key={index}
-                                    timeout={2000}
+                                    key={message.aid}
+                                    timeout={500}
                                     classNames={'message'}
                                 >
                                     <Message  deleteMessage={deleteMessage}  userId={user.uid} message={message}/>
